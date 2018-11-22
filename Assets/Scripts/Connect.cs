@@ -27,7 +27,7 @@ public class Connect : MonoBehaviourPunCallbacks
     {
         print("connect finish");
         PhotonNetwork.JoinRandomRoom(null, 2);
-        print("make or join room start");
+        print("join room start");
     }
 
     public override void OnCreatedRoom()
@@ -37,13 +37,13 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        print("make or join room finish");
+        print("join room finish");
         print("now Player : " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        print("make or join room failed. Create Room Start");
+        print("join room failed. Create Room Start");
         PhotonNetwork.CreateRoom(null, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
     }
 }
