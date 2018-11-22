@@ -1,16 +1,16 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class Connect : MonoBehaviourPunCallbacks
+public class NetWorkManager : Manager
 {
     string gameVersion = "1";
     private void Awake()
     {
+        _ManagerID = AllManager.TheManager._NetworkManNum;
         PhotonNetwork.AutomaticallySyncScene = true;
     }
-
     public void ConnectClient()
     {
         if (!PhotonNetwork.IsConnected)
@@ -20,9 +20,17 @@ public class Connect : MonoBehaviourPunCallbacks
             print("connect start");
         }
     }
-
-
-
+    public override void Receive(AllManager.Packet pk)
+    {
+        switch(pk.methodName)
+        {
+            case "ConnectClient":
+                {
+                    ConnectClient();
+                    break;
+                }
+        }
+    }
     public override void OnConnectedToMaster()
     {
         print("connect finish");
