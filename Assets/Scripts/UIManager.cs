@@ -42,9 +42,19 @@ public class UIManager : Manager
                     SetEnemyHPText(pk.intList[0]);
                     break;
                 }
-            case "SetThisTurnText":
+            case "SetThisTurnDamageText":
                 {
-                    SetThisTurnText(pk.intList[0], pk.intList[1], pk.intList[2]);
+                    SetThisTurnDamageText(pk.intList[0]);
+                    break;
+                }
+            case "SetThisTurnDefenceText":
+                {
+                    SetThisTurnDefenceText(pk.intList[0]);
+                    break;
+                }
+            case "SetThisTurnHealingText":
+                {
+                    SetThisTurnHealingText(pk.intList[0]);
                     break;
                 }
         }
@@ -71,11 +81,21 @@ public class UIManager : Manager
         EnemyHP.text = num.ToString();
     }
 
-    public void SetThisTurnText(int dam, int def, int heal)
+    public void SetThisTurnDamageText(int num)
     {
-        ThisTurnDamage.text = dam.ToString();
-        ThisTurnDefence.text = def.ToString();
-        ThisTurnHealing.text = heal.ToString();
+        ThisTurnDamage.text = num.ToString();
+    }
+
+
+    public void SetThisTurnDefenceText(int num)
+    {
+        ThisTurnDefence.text = num.ToString();
+    }
+
+
+    public void SetThisTurnHealingText(int num)
+    {
+        ThisTurnHealing.text = num.ToString();
     }
 
     public void ToggleConnectButton(bool active)

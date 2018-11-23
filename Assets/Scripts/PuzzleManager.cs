@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class PuzzleManager : Manager
 {
-    public const float maxTurnTime = 150f;
+    public const float maxTurnTime = 15f;
     public float turnTime;
     public int intTurnTime;
     public bool isTurn = true;
@@ -81,6 +81,18 @@ public class PuzzleManager : Manager
                         clickedTile[i].ResetTile();
                     }
                     checkTurn(clickedTileNum, count);
+                }
+            }
+            else if(Input.GetMouseButtonDown(1))
+            {
+                if(isTileClick)
+                {
+                    for(int i = 0; i < clickedTile.Count;++i)
+                    {
+                        clickedTile[i].ResetTileScale();
+                    }
+                    clickedTile.Clear();
+                    isTileClick = false;
                 }
             }
         }

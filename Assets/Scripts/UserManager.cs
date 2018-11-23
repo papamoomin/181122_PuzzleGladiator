@@ -32,9 +32,19 @@ public class UserManager : Manager
         TheManager.Send("SetEnemyHPText", TheManager._UIManNum, new List<int> { num });
     }
 
-    public void SetThisTurnText(int dam, int def, int heal)
+    public void SetThisTurnDamageText(int num)
     {
-        TheManager.Send("SetThisTurnText", TheManager._UIManNum, new List<int> { dam, def, heal });
+        TheManager.Send("SetThisTurnDamageText", TheManager._UIManNum, new List<int> { num });
+    }
+
+    public void SetThisTurnDefenceText(int num)
+    {
+        TheManager.Send("SetThisTurnDefenceText", TheManager._UIManNum, new List<int> { num });
+    }
+
+    public void SetThisTurnHealingText(int num)
+    {
+        TheManager.Send("SetThisTurnHealingText", TheManager._UIManNum, new List<int> { num });
     }
 
     public override void Receive(AllManager.Packet pk)
@@ -74,7 +84,6 @@ public class UserManager : Manager
             {
                 ProgressingTurn();
             }
-            SetThisTurnText(nowTurnDamage, nowTurnDef, nowTurnHeal);
         }
         else
         {
@@ -133,7 +142,9 @@ public class UserManager : Manager
         nowTurnEnemyHeal = 0;
         nowTurnEnemyDamage = 0;
         nowTurnEnemyDef = 0;
-        SetThisTurnText(nowTurnDamage, nowTurnDef, nowTurnHeal);
+        SetThisTurnDamageText(0);
+        SetThisTurnDefenceText(0);
+        SetThisTurnHealingText(0);
     }
 
     public void HealHP(int value)
