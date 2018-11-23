@@ -7,6 +7,7 @@ public class PuzzleManager : Manager
 {
     public const float maxTurnTime = 150f;
     public float turnTime;
+    public int intTurnTime;
     public bool isTurn = true;
     public bool isTileClick = false;
     public int clickedTileNum; // 0 = sword, 1 = shield, 2 = potion
@@ -39,10 +40,17 @@ public class PuzzleManager : Manager
     public void InitOnlyTurn()
     {
         turnTime = maxTurnTime;
+        intTurnTime = (int)maxTurnTime;
+        SetTimeTextSet(intTurnTime);
         isTurn = true;
         isTileClick = false;
         lastClick = -1;
         clickedTile.Clear();
+    }
+
+    public void SetTimeTextSet(int num)
+    {
+        TheManager.Send("SetTimeText", TheManager._UIManNum, new List<int> { num });
     }
 
     private void Update()
@@ -50,6 +58,12 @@ public class PuzzleManager : Manager
         if (isTurn)
         {
             turnTime -= Time.deltaTime;
+            if (intTurnTime != ((int)turnTime + 1))
+            {
+                intTurnTime = (int)turnTime + 1;
+                SetTimeTextSet(intTurnTime);
+            }
+
             if (turnTime < 0)
             {
                 isTurn = false;

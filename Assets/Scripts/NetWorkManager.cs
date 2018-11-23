@@ -77,6 +77,7 @@ public class NetWorkManager : Manager
 
     public void SendStartSignal()
     {
+        print("SendStartSignal");
         TheManager.Send("Init", TheManager._PuzzleManNum);
         TheManager.Send("Init", TheManager._UserManNum);
         TheManager.Send("GameInit", TheManager._UIManNum);

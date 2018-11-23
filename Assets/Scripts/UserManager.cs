@@ -22,6 +22,21 @@ public class UserManager : Manager
         TheManager = AllManager.TheManager;
     }
 
+    public void SetPlayerHPText(int num)
+    {
+        TheManager.Send("SetPlayerHPText", TheManager._UIManNum, new List<int> { num });
+    }
+
+    public void SetEnemyHPText(int num)
+    {
+        TheManager.Send("SetEnemyHPText", TheManager._UIManNum, new List<int> { num });
+    }
+
+    public void SetThisTurnText(int dam, int def, int heal)
+    {
+        TheManager.Send("SetThisTurnText", TheManager._UIManNum, new List<int> { dam, def, heal });
+    }
+
     public override void Receive(AllManager.Packet pk)
     {
         switch (pk.methodName)
@@ -59,6 +74,7 @@ public class UserManager : Manager
             {
                 ProgressingTurn();
             }
+            SetThisTurnText(nowTurnDamage, nowTurnDef, nowTurnHeal);
         }
         else
         {
@@ -96,6 +112,8 @@ public class UserManager : Manager
             HealHP(nowTurnHeal);
         isTurnEnemyCheck = false;
         isTurnPlayerCheck = false;
+        SetPlayerHPText(NowHP);
+        SetEnemyHPText(EnemyHP);
         TheManager.Send("InitOnlyTurn", TheManager._PuzzleManNum);
         InitTurn();
     }
@@ -115,6 +133,7 @@ public class UserManager : Manager
         nowTurnEnemyHeal = 0;
         nowTurnEnemyDamage = 0;
         nowTurnEnemyDef = 0;
+        SetThisTurnText(nowTurnDamage, nowTurnDef, nowTurnHeal);
     }
 
     public void HealHP(int value)
