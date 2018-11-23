@@ -5,9 +5,9 @@ using UnityEngine;
 
 public abstract class Manager : MonoBehaviourPunCallbacks
 {
-
-    protected int _ManagerID = 0;
-    public int ManagerID
+    public AllManager TheManager;
+    protected short _ManagerID = 0;
+    public short ManagerID
     {
         get
         {

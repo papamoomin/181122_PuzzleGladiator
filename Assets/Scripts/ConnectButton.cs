@@ -6,12 +6,12 @@ using Photon.Pun;
 public class ConnectButton : MonoBehaviourPunCallbacks
 {
     AllManager TheManager;
-    public void Start()
+    public void Awake()
     {
         TheManager = AllManager.TheManager;
     }
     public void StartConnect()
     {
-        TheManager.Send("ConnectClient", TheManager._NetworkManNum, null);
+        TheManager.Send("ConnectClient", TheManager._NetworkManNum);
     }
 }

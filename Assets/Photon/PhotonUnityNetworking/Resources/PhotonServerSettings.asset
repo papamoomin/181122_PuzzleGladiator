@@ -31,4 +31,5 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - ReceiveEnemyTurnValue
   DisableAutoOpenWizard: 1
